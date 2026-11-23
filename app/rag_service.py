@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class KnowledgeBaseChunk:
-    """Represents a chunk of the Fortivex knowledge base."""
+    """Represents a chunk of the VoxFlow knowledge base."""
 
     def __init__(self, title: str, content: str):
         self.title = title
@@ -25,7 +25,7 @@ class KnowledgeBaseChunk:
 
 
 class RAGService:
-    """Retrieval-Augmented Generation (RAG) service for Fortivex CRM.
+    """Retrieval-Augmented Generation (RAG) service for VoxFlow CRM.
 
     Loads the knowledge base, indexes chunks, performs keyword/semantic
     relevance scoring, and queries Gemini to produce grounded voice responses.
@@ -155,7 +155,7 @@ class RAGService:
         context_text = "\n\n---\n\n".join([c.full_text for c in relevant_chunks])
 
         system_instruction = (
-            "You are the voice assistant for Fortivex CRM. "
+            "You are the voice assistant for VoxFlow CRM. "
             "Use ONLY the provided retrieved context chunks to answer the caller's question. "
             "Your response will be spoken over a telephone line, so make it natural, crisp, polite, "
             "and concise (2 to 3 sentences maximum). Strictly ground your answer in the provided facts. "
@@ -205,7 +205,7 @@ class RAGService:
             top_chunk = relevant_chunks[0]
             summary_sentences = [s.strip() for s in top_chunk.content.split("\n") if s.strip() and not s.startswith("-")]
             sample = summary_sentences[0] if summary_sentences else top_chunk.content[:200]
-            answer = f"According to Fortivex CRM documentation on {top_chunk.title}: {sample}"
+            answer = f"According to VoxFlow CRM documentation on {top_chunk.title}: {sample}"
 
         model_name = "offline-grounded-engine" if not error_note else f"offline-fallback-due-to-error: {error_note}"
         return KnowledgeQueryResponse(

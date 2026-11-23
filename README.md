@@ -1,6 +1,6 @@
-# AI CRM & Voice Agent Backend (Fortivex CRM API)
+# AI CRM & Voice Agent Backend (VoxFlow CRM API)
 
-A clean, production-ready Python FastAPI microservice for an enterprise AI-powered CRM and Voice Agent platform (**Fortivex CRM**). Powered by the official Google GenAI SDK (`from google import genai`) using **`gemini-4-hydrogen`** (with automatic fallback to **`gemini-3.5-flash-lite`**).
+A clean, production-ready Python FastAPI microservice for an enterprise AI-powered CRM and Voice Agent platform (**VoxFlow CRM**). Powered by the official Google GenAI SDK (`from google import genai`) using **`gemini-4-hydrogen`** (with automatic fallback to **`gemini-3.5-flash-lite`**).
 
 ---
 
@@ -55,7 +55,7 @@ flowchart TD
           |                               v                          v
           |                     +-------------------+      +--------------------+
           |                     | data/knowledge.txt|      | schedule_followup_ |
-          |                     |  (Fortivex Docs)  |      |  call() (Booking)  |
+          |                     |  (VoxFlow Docs)   |      |  call() (Booking)  |
           |                     +-------------------+      +--------------------+
           \                               |                          /
            -------------------------------+--------------------------
@@ -84,7 +84,7 @@ flowchart TD
      - `followup_required`: Boolean urgency flag.
 
 2. **Grounded Voice RAG (`POST /api/v1/ask-kb`)**:
-   - Indexes and retrieves semantic chunks from `data/knowledge.txt` (Fortivex CRM pricing, tiers, features, SLAs).
+   - Indexes and retrieves semantic chunks from `data/knowledge.txt` (VoxFlow CRM pricing, tiers, features, SLAs).
    - Feeds context into Gemini with strict grounding system instructions to ensure **zero hallucination**.
    - Output formatted for realistic voice telephony: crisp, natural, 2–3 spoken sentences.
 
@@ -121,7 +121,7 @@ ai-crm-voice-agent-api/
 │   └── main.py               # FastAPI microservice with REST endpoints
 │
 ├── data/
-│   └── knowledge.txt         # Realistic Fortivex CRM company FAQs, tiers & policies
+│   └── knowledge.txt         # Realistic VoxFlow CRM company FAQs, tiers & policies
 │
 └── tests/
     └── test_api.py           # Comprehensive pytest suite for all endpoints & tools
@@ -251,7 +251,7 @@ Extracts summary, customer sentiment, lead score (1–10), and recommended actio
 curl -X POST "http://localhost:8000/api/v1/analyze-call" \
   -H "Content-Type: application/json" \
   -d '{
-    "transcript": "Agent: Thanks for calling Fortivex CRM. My name is Alex.\nCustomer: Hi Alex, I am Sarah, VP of Sales at TechNova. We have 45 reps using HubSpot, but our team hates manually typing call summaries. We need an AI voice agent that transcribes calls, scores leads, and logs summaries directly to our CRM. If this works, we want to roll it out to all reps next month. Could we schedule a demo tomorrow at 2 PM?"
+    "transcript": "Agent: Thanks for calling VoxFlow CRM. My name is Alex.\nCustomer: Hi Alex, I am Sarah, VP of Sales at TechNova. We have 45 reps using HubSpot, but our team hates manually typing call summaries. We need an AI voice agent that transcribes calls, scores leads, and logs summaries directly to our CRM. If this works, we want to roll it out to all reps next month. Could we schedule a demo tomorrow at 2 PM?"
   }'
 ```
 
@@ -289,7 +289,7 @@ curl -X POST "http://localhost:8000/api/v1/ask-kb" \
 ```json
 {
   "question": "What is included in the Growth tier and what is the overage fee for voice minutes?",
-  "answer": "The Fortivex Growth plan is priced at $99 per user per month and includes 2,500 AI voice minutes, real-time agentic function calling, advanced lead scoring, bi-directional CRM sync, and telephony connectors. Any additional voice minutes beyond the included amount are billed at $0.03 per minute.",
+  "answer": "The VoxFlow Growth plan is priced at $99 per user per month and includes 2,500 AI voice minutes, real-time agentic function calling, advanced lead scoring, bi-directional CRM sync, and telephony connectors. Any additional voice minutes beyond the included amount are billed at $0.03 per minute.",
   "sources": [
     "3. PRICING TIERS & PLANS",
     "GROWTH PLAN (Most Popular)"

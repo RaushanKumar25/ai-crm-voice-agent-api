@@ -31,7 +31,7 @@ class CallAnalysisRequest(BaseModel):
         min_length=10,
         description="The customer call audio transcript text to analyze.",
         examples=[
-            "Agent: Hello, thank you for calling Fortivex CRM. How can I help you today?\n"
+            "Agent: Hello, thank you for calling VoxFlow CRM. How can I help you today?\n"
             "Customer: Hi! I am Sarah from TechCorp. We currently have 35 sales reps on HubSpot, "
             "and our call logging is a mess. We are looking for an AI voice solution that automatically "
             "transcribes calls and scores leads. We'd love to see a demo tomorrow at 2 PM if possible."
@@ -83,7 +83,7 @@ class KnowledgeQueryRequest(BaseModel):
     question: str = Field(
         ...,
         min_length=3,
-        description="Customer or voice agent question to answer using the Fortivex CRM knowledge base.",
+        description="Customer or voice agent question to answer using the VoxFlow CRM knowledge base.",
         examples=["What are the differences between the Starter and Growth plans, and what are the voice minute overage fees?"]
     )
 

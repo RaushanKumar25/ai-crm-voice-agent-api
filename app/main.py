@@ -29,7 +29,7 @@ logger = logging.getLogger("ai_crm_voice_agent_api")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifecycle event handler for application startup and shutdown."""
-    logger.info("Initializing Fortivex AI CRM & Voice Agent API...")
+    logger.info("Initializing VoxFlow AI CRM & Voice Agent API...")
     logger.info("Primary Model: %s | Fallback Model: %s", settings.GEMINI_MODEL, settings.GEMINI_FALLBACK_MODEL)
     logger.info("Knowledge Base Path: %s (Loaded Chunks: %d)", settings.KNOWLEDGE_BASE_PATH, len(rag_service.chunks))
     if not settings.is_api_key_configured:
@@ -37,14 +37,14 @@ async def lifespan(app: FastAPI):
     else:
         logger.info("Gemini API key is configured and active.")
     yield
-    logger.info("Shutting down Fortivex AI CRM & Voice Agent API...")
+    logger.info("Shutting down VoxFlow AI CRM & Voice Agent API...")
 
 
 # Initialize FastAPI App
 app = FastAPI(
-    title="Fortivex AI CRM & Voice Agent API",
+    title="VoxFlow AI CRM & Voice Agent API",
     description=(
-        "Production-ready FastAPI backend for Fortivex CRM: "
+        "Production-ready FastAPI backend for VoxFlow CRM: "
         "AI call transcript summarization, lead scoring (1-10), "
         "sentiment analysis, agentic callback tool scheduling, and RAG knowledge retrieval."
     ),
@@ -153,7 +153,7 @@ async def analyze_call(payload: CallAnalysisRequest) -> CallAnalysisResponse:
     tags=["Knowledge Retrieval"],
 )
 async def ask_knowledge_base(payload: KnowledgeQueryRequest) -> KnowledgeQueryResponse:
-    """Retrieves relevant context chunks from the Fortivex CRM knowledge base
+    """Retrieves relevant context chunks from the VoxFlow CRM knowledge base
 
     and uses Gemini to formulate a grounded, concise voice-agent response
     without hallucinating facts.

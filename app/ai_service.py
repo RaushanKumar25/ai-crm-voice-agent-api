@@ -29,7 +29,7 @@ BOOKINGS_REGISTRY: List[Dict[str, Any]] = []
 def schedule_followup_call(
     customer_name: str = "Valued Prospect",
     preferred_time: str = "Tomorrow at 10:00 AM EST",
-    topic: str = "Fortivex CRM Consultation",
+    topic: str = "VoxFlow CRM Consultation",
 ) -> dict:
     """Schedules a followup call or demo for a customer.
 
@@ -102,7 +102,7 @@ class AIService:
         client = self._get_genai_client()
 
         system_prompt = (
-            "You are an expert revenue operations and sales enablement AI for Fortivex CRM. "
+            "You are an expert revenue operations and sales enablement AI for VoxFlow CRM. "
             "Analyze the provided telephone call transcript between an agent and a prospective lead or customer. "
             "Extract a concise summary, classify overall sentiment (Positive, Neutral, Negative), "
             "evaluate lead qualification score on a strict scale from 1 (unqualified/lost) to 10 (hot prospect/ready to buy), "
@@ -184,11 +184,11 @@ class AIService:
         if "ai" in lower_text or "transcrib" in lower_text:
             pain_points.append("Automated transcription and call sentiment tracking")
         if not pain_points:
-            pain_points.append("General inquiry regarding Fortivex CRM voice agent capabilities")
+            pain_points.append("General inquiry regarding VoxFlow CRM voice agent capabilities")
 
         first_sentence = transcript.strip().split("\n")[0][:120]
         summary = (
-            f"Customer engaged in discussion regarding Fortivex CRM capabilities. "
+            f"Customer engaged in discussion regarding VoxFlow CRM capabilities. "
             f"Key focus on voice features and CRM workflow integration: {first_sentence}..."
         )
 
@@ -222,7 +222,7 @@ class AIService:
         client = self._get_genai_client()
 
         system_instruction = (
-            "You are an AI Voice & CRM Agent for Fortivex CRM. "
+            "You are an AI Voice & CRM Agent for VoxFlow CRM. "
             "You speak directly with prospective customers and existing clients over the telephone. "
             "Always be courteous, concise, and helpful. "
             "If the customer expresses interest in scheduling a demo, booking a call, meeting with a sales rep, "
@@ -336,7 +336,7 @@ class AIService:
                             if not call_args.get("preferred_time"):
                                 call_args["preferred_time"] = "Tomorrow at 10:00 AM EST"
                             if not call_args.get("topic"):
-                                call_args["topic"] = "Fortivex CRM Product Demo"
+                                call_args["topic"] = "VoxFlow CRM Product Demo"
 
                             tool_result = schedule_followup_call(
                                 customer_name=call_args["customer_name"],
@@ -359,7 +359,7 @@ class AIService:
                 elif tool_details and tool_details.tool_result and "confirmation_message" in tool_details.tool_result:
                     final_reply = tool_details.tool_result["confirmation_message"]
                 else:
-                    final_reply = "Thank you for reaching out to Fortivex CRM. How can I assist you further?"
+                    final_reply = "Thank you for reaching out to VoxFlow CRM. How can I assist you further?"
 
                 return AgentChatResponse(
                     reply=final_reply,
@@ -398,7 +398,7 @@ class AIService:
             pref_time = time_match.group(1).title() if time_match else "Tomorrow at 2:00 PM EST"
 
             # Extract topic
-            topic = "Fortivex CRM Product Demo"
+            topic = "VoxFlow CRM Product Demo"
             if "pricing" in lower_msg:
                 topic = "Enterprise Pricing & Plan Consultation"
             elif "support" in lower_msg:
@@ -434,7 +434,7 @@ class AIService:
             )
 
         reply = (
-            "Hello! I am the Fortivex CRM AI Voice Agent. I can assist you with product information, "
+            "Hello! I am the VoxFlow CRM AI Voice Agent. I can assist you with product information, "
             "pricing plan details, or book a live product demo and callback with our sales team. "
             "How can I assist you today?"
         )

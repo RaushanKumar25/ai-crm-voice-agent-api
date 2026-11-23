@@ -1,9 +1,9 @@
 ================================================================================
-FORTIVEX CRM - PRODUCT KNOWLEDGE BASE, PRICING, & SUPPORT POLICIES
+VOXFLOW CRM - PRODUCT KNOWLEDGE BASE, PRICING, & SUPPORT POLICIES
 ================================================================================
 
 1. COMPANY OVERVIEW
-Fortivex CRM (https://fortivex.com) is an enterprise-grade, AI-native B2B Customer Relationship Management (CRM) platform designed specifically for high-velocity sales and customer operations teams. Fortivex transforms voice and video conversations into real-time CRM updates, automates call summaries, scores leads autonomously using large language models, and equips revenue teams with real-time AI voice agents for inbound qualification and outbound demo scheduling.
+VoxFlow CRM (https://voxflow.com) is an enterprise-grade, AI-native B2B Customer Relationship Management (CRM) platform designed specifically for high-velocity sales and customer operations teams. VoxFlow transforms voice and video conversations into real-time CRM updates, automates call summaries, scores leads autonomously using large language models, and equips revenue teams with real-time AI voice agents for inbound qualification and outbound demo scheduling.
 
 Headquarters: San Francisco, California
 Target Customers: Fast-growing B2B SaaS, mid-market fintech, logistics, and enterprise sales teams.
@@ -58,10 +58,10 @@ ADD-ONS & COMPUTE:
 - High-Volume Voice Add-on: $250 for 10,000 additional voice minutes ($0.025/min).
 
 4. SUPPORT POLICIES & SERVICE LEVEL AGREEMENTS (SLAs)
-Fortivex offers tiered support based on the customer's subscription plan:
+VoxFlow offers tiered support based on the customer's subscription plan:
 
 - Standard Support (Starter Plan):
-  * Channels: Email (support@fortivex.com) and in-app ticketing.
+  * Channels: Email (support@voxflow.com) and in-app ticketing.
   * Hours: Monday through Friday, 8:00 AM – 8:00 PM Eastern Standard Time (EST).
   * Guaranteed First Response Time: Within 24 business hours.
 
@@ -79,9 +79,9 @@ Fortivex offers tiered support based on the customer's subscription plan:
     - Sev-3 (Minor / General Inquiry): Under 4 hours.
 
 5. BILLING, TRIAL, & CANCELLATION POLICIES
-- Free Trial: Fortivex provides a 14-day fully featured free trial on the Growth tier with 100 complimentary AI voice minutes. No credit card is required to sign up.
+- Free Trial: VoxFlow provides a 14-day fully featured free trial on the Growth tier with 100 complimentary AI voice minutes. No credit card is required to sign up.
 - Money-Back Guarantee: All new annual subscriptions include an unconditional 30-day money-back guarantee. If you are not satisfied within the first 30 days of an annual plan, you will receive a 100% refund.
-- Cancellation: Monthly subscriptions can be canceled at any time from the Fortivex Admin Dashboard. The subscription will remain active until the end of the current billing cycle, and no further charges will apply.
+- Cancellation: Monthly subscriptions can be canceled at any time from the VoxFlow Admin Dashboard. The subscription will remain active until the end of the current billing cycle, and no further charges will apply.
 - Data Retention Upon Cancellation: If an account is canceled, account owners have 30 days to export their CRM logs, call transcripts, and analytics. After 30 days, all customer data is permanently and securely purged in accordance with DoD 5220.22-M standards.
 
 6. SECURITY, PRIVACY, & COMPLIANCE

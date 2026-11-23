@@ -50,7 +50,7 @@ def test_ask_kb_validation_error():
 def test_analyze_call_endpoint():
     """Verify POST /api/v1/analyze-call extracts structured summary, sentiment, and lead score."""
     transcript = (
-        "Agent: Welcome to Fortivex CRM sales. My name is Alex.\n"
+        "Agent: Welcome to VoxFlow CRM sales. My name is Alex.\n"
         "Customer: Hi Alex, I am Marcus from Apex Logistics. We are managing 50 reps and currently using "
         "spreadsheets and basic VoIP. We urgently need an AI voice agent to qualify inbound leads "
         "and push them into HubSpot. Can we book a deep dive demo tomorrow afternoon?"
