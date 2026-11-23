@@ -73,9 +73,16 @@ class AIService:
         self.primary_model = settings.GEMINI_MODEL
         self.fallback_model = settings.GEMINI_FALLBACK_MODEL
 
-    def _get_genai_client(self) -> genai.Client:
-        """Initialize Google GenAI client with configured API key."""
-        return genai.Client(api_key=settings.GEMINI_API_KEY)
+    def _get_genai_client(self, timeout_ms: Optional[int] = None) -> genai.Client:
+        """Initialize Google GenAI client with configured API key and timeout/retry options."""
+        effective_timeout = timeout_ms or settings.GEMINI_TIMEOUT_MS
+        return genai.Client(
+            api_key=settings.GEMINI_API_KEY,
+            http_options=types.HttpOptions(
+                timeout=effective_timeout,
+                retry_options=types.HttpRetryOptions(attempts=settings.GEMINI_MAX_RETRIES),
+            ),
+        )
 
     # --------------------------------------------------------------------------
     # 1. Call Transcript Analyzer (Structured Output)
@@ -90,7 +97,7 @@ class AIService:
             logger.info("GEMINI_API_KEY not configured. Running offline deterministic analysis.")
             return self._analyze_transcript_offline(transcript)
 
-        models_to_try = [self.primary_model, self.fallback_model]
+        models_to_try = [self.primary_model, self.fallback_model, "gemini-3.1-flash-lite"]
         last_error = None
         client = self._get_genai_client()
 
@@ -115,11 +122,19 @@ class AIService:
                         temperature=0.1,
                         response_mime_type="application/json",
                         response_schema=CallAnalysisSchema,
+                        http_options=types.HttpOptions(
+                            timeout=settings.GEMINI_TIMEOUT_MS,
+                            retry_options=types.HttpRetryOptions(attempts=settings.GEMINI_MAX_RETRIES),
+                        ),
                     ),
                 )
 
                 if response and response.text:
-                    parsed_data = json.loads(response.text)
+                    raw_text = response.text.strip()
+                    if raw_text.startswith("```"):
+                        raw_text = re.sub(r"^```(?:json)?\s*", "", raw_text)
+                        raw_text = re.sub(r"\s*```$", "", raw_text)
+                    parsed_data = json.loads(raw_text)
                     return CallAnalysisResponse(
                         summary=parsed_data.get("summary", ""),
                         sentiment=SentimentEnum(parsed_data.get("sentiment", "Neutral")),
@@ -202,7 +217,7 @@ class AIService:
             logger.info("GEMINI_API_KEY not configured. Running offline agent simulation.")
             return self._agent_chat_offline(message, customer_name)
 
-        models_to_try = [self.primary_model, self.fallback_model]
+        models_to_try = [self.primary_model, self.fallback_model, "gemini-3.1-flash-lite"]
         last_error = None
         client = self._get_genai_client()
 
@@ -232,6 +247,10 @@ class AIService:
                         system_instruction=system_instruction,
                         temperature=0.2,
                         tools=[schedule_followup_call],
+                        http_options=types.HttpOptions(
+                            timeout=settings.GEMINI_TIMEOUT_MS,
+                            retry_options=types.HttpRetryOptions(attempts=settings.GEMINI_MAX_RETRIES),
+                        ),
                     ),
                 )
                 response = chat.send_message(full_prompt)

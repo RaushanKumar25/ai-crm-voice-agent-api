@@ -15,8 +15,8 @@ def test_health_check():
     data = response.json()
     assert data["status"] == "healthy"
     assert data["service"] == "ai-crm-voice-agent-api"
-    assert "gemini-4-hydrogen" in data["primary_model"]
-    assert "gemini-3.5-flash-lite" in data["fallback_model"]
+    assert "gemini-2.5-flash" in data["primary_model"]
+    assert "gemini-2.5-flash-lite" in data["fallback_model"]
 
 
 def test_rag_service_chunks_loaded():

@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class SentimentEnum(str, Enum):
@@ -41,6 +41,8 @@ class CallAnalysisRequest(BaseModel):
 
 class CallAnalysisSchema(BaseModel):
     """Pydantic schema used for Gemini structured JSON output."""
+    model_config = ConfigDict(extra="ignore", use_enum_values=True)
+
     summary: str = Field(
         ...,
         description="A concise 2-3 sentence executive summary of the conversation and customer needs."

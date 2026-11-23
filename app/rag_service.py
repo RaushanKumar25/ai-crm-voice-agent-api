@@ -111,10 +111,16 @@ class RAGService:
 
     def _call_gemini_grounded(self, prompt: str, system_instruction: str) -> Tuple[str, str]:
         """Calls Gemini with primary model, falling back to flash-lite if needed."""
-        models_to_try = [settings.GEMINI_MODEL, settings.GEMINI_FALLBACK_MODEL]
+        models_to_try = [settings.GEMINI_MODEL, settings.GEMINI_FALLBACK_MODEL, "gemini-3.1-flash-lite"]
         last_error = None
 
-        client = genai.Client(api_key=settings.GEMINI_API_KEY)
+        client = genai.Client(
+            api_key=settings.GEMINI_API_KEY,
+            http_options=types.HttpOptions(
+                timeout=settings.GEMINI_TIMEOUT_MS,
+                retry_options=types.HttpRetryOptions(attempts=settings.GEMINI_MAX_RETRIES),
+            ),
+        )
 
         for model_name in models_to_try:
             try:
@@ -126,6 +132,10 @@ class RAGService:
                         system_instruction=system_instruction,
                         temperature=0.1,  # Low temperature for strict grounding
                         max_output_tokens=300,
+                        http_options=types.HttpOptions(
+                            timeout=settings.GEMINI_TIMEOUT_MS,
+                            retry_options=types.HttpRetryOptions(attempts=settings.GEMINI_MAX_RETRIES),
+                        ),
                     ),
                 )
                 if response and response.text:
